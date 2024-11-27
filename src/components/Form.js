@@ -23,18 +23,20 @@ export default function Form({ onAddTask }) {
         // TODO: add a form to add a new task
         <div>
             <form onSubmit={onSubmit}>
-                <label for="description-input"> Task Description: </label>
-                <br />
+                {/* <label for="description-input"> Task Description: </label>
+                <br /> */}
                 {/* text input field for description */}
-                <textarea
+                <input
+                    type="text"
                     id="description-input"
                     name="description-input"
                     value={description}
                     onChange={handleDescription}
+                    placeholder="New Task"
                 />
             </form>
             <button type="submit" onClick={onSubmit}>
-                Submit
+                Add Task
             </button>
         </div>
     );
