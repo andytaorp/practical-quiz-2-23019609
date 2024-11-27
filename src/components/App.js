@@ -5,21 +5,21 @@ import TaskList from "./TaskList";
 function App() {
     const [tasks, setTasks] = useState([]);
 
-    const handleAddTask = (newTask) => {
+    const onAddTask = (newTask) => {
         // TODO: write code to add a new task
         setTasks((prev) => [...prev, newTask]);
     };
 
-    const handleToggleTask = (id) => {
+    const onToggleTask = (id) => {
         // TODO: write code to toggle a task's status
-        tasks.map(function (task, index) {
-            if (task.id === id) {
-                task.status = !task.status;
-            }
-        });
+        const updateTask = tasks.map((task) =>
+            task.id === id ? { ...task, status: !task.status } : task
+        );
+
+        setTasks(updateTask);
     };
 
-    const handleDeleteTask = (id) => {
+    const onDeleteTask = (id) => {
         // TODO: write code to delete a task
         setTasks((prev) => prev.filter((task, index) => task.id !== id));
     };
@@ -28,14 +28,12 @@ function App() {
         <div className="app">
             <h1>Task Tracker</h1>
             {/*TODO: add a form to add a new task*/}
-            <Form
-                handleAddTask={handleAddTask}
-                handleToggleTask={handleToggleTask}
-            />
+            <Form onAddTask={onAddTask} />
             {/*TODO: add a list of tasks*/}
             <TaskList
-                handleDeleteTask={handleDeleteTask}
-                handleToggleTask={handleToggleTask}
+                tasks={tasks}
+                onToggleTask={onToggleTask}
+                onDeleteTask={onDeleteTask}
             />
         </div>
     );
